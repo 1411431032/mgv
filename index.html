@@ -88,7 +88,6 @@ tr:hover { background-color: #fdfdfd; }
 <select id="vocFilter" class="filter-select" onchange="render()">
     <option value="all">所有分類 (Voc)</option>
     <option value="voc.1">Voc. 1</option>
-    <option value="voc.2">Voc. 2</option>
     
 </select>
 
@@ -173,59 +172,7 @@ const rawDataList = [
     { word: "contributor", pos: "n.", chinese: "捐獻者；貢獻者", exampleEn: "Older people are contributors to the economy.", exampleCh: "老人是經濟的重要貢獻者。", voc: "voc.1", unit: "unit1" },
     { word: "cooperate", pos: "v.", chinese: "合作；配合", exampleEn: "The two companies cooperated in joint ventures.", exampleCh: "兩家公司在合資企業中合作。", voc: "voc.1", unit: "unit1" },
     { word: "cooperation", pos: "n.", chinese: "合作；協助", exampleEn: "The company produces computers in cooperation with others.", exampleCh: "該公司與其他公司合作生產電腦。", voc: "voc.1", unit: "unit1" },
-    // Voc 2, Unit 1 - Personnel Management (No. 1–53)
-    { word: “a bachelor’s degree”, pos: “n.”, chinese: “學士學位”, sentences: [{en: “This job requires at least a bachelor’s degree in business.”, ch: “這份工作要求至少有商學學士學位。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “a degree”, pos: “n.”, chinese: “部分地；在某種程度上”, sentences: [{en: “She’s got a bachelor’s/master’s degree in history from Yale.”, ch: “她獲得了耶魯大學歷史學專業的學士／碩士學位。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “a doctoral degree / a PhD degree”, pos: “n.”, chinese: “博士學位”, sentences: [{en: “She has a doctorate in physics from Norwich.”, ch: “她獲得了諾里奇大學的物理學博士學位。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “a master’s degree”, pos: “n.”, chinese: “碩士學位”, sentences: [{en: “An MA and an MSc are both Master’s degrees. MA（文學碩士學位）和 MSc（理學碩士學位）都是碩士學位。”, ch: “”}], voc: “voc.2”, unit: “unit1” },
-    { word: “accept”, pos: “v.”, chinese: “接受；收受；領受”, sentences: [{en: “I accept full responsibility for the failure of the plan.”, ch: “我承擔這項計劃失敗的全部責任。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “acceptance”, pos: “n.”, chinese: “認可，接納”, sentences: [{en: “The idea rapidly gained acceptance (= became approved of) in political circles.”, ch: “這個想法很快就得到了政界的認同。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “accomplish”, pos: “v.”, chinese: “完成；實現；達到；做到”, sentences: [{en: “The students accomplished the task in less than ten minutes.”, ch: “學生不到十分鐘就完成了任務。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “accomplishment”, pos: “n.”, chinese: “成就；完成；實現”, sentences: [{en: “Getting the two leaders to sign a peace treaty was his greatest accomplishment.”, ch: “他最大的成就是促成了兩位領導人簽署和平協議。”}, {en: “We celebrated the successful accomplishment of our task.”, ch: “我們慶祝圓滿完成任務。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “achieve”, pos: “v.”, chinese: “完成，達到，實現”, sentences: [{en: “The government’s training policy, he claimed, was achieving its objectives.”, ch: “他稱政府制定的培訓方針即將達到預期目標。”}, {en: “She finally achieved her ambition to visit South America.”, ch: “她終於實現了去南美洲旅遊的夢想。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “achievement”, pos: “n.”, chinese: “成就，成績；功績”, sentences: [{en: “An Olympic silver medal is a remarkable achievement for one so young.”, ch: “對於如此年輕的選手而言，奪得奧運會銀牌是個了不起的成就。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “acquaint”, pos: “v.”, chinese: “使認識；使瞭解；使熟悉；使知悉”, sentences: [{en: “Take time to acquaint yourself with the rules.”, ch: “花點時間熟悉一下規則。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “acquaintance”, pos: “n.”, chinese: “相識的人，熟人；認識，結識”, sentences: [{en: “a business acquaintance.”, ch: “在生意上打過交道的人。”}, {en: “It was at the Taylors’ party that I first made his acquaintance (= first met him).”, ch: “我是在泰勒家的聚會上初次和他相識的。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “acquainted”, pos: “adj.”, chinese: “相識的；認識的；熟悉的”, sentences: [{en: “I am not personally acquainted with the gentleman in question.”, ch: “我本人和所說的這位先生並不相識。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “administration”, pos: “n.”, chinese: “管理；經營；行政”, sentences: [{en: “Teachers complain that more of their time is taken up with administration than with teaching.”, ch: “教師抱怨他們花在行政工作上的時間超過了教學的時間。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “administrative”, pos: “adj.”, chinese: “管理的；行政的”, sentences: [{en: “Your responsibilities will be mainly administrative.”, ch: “你的職責主要是在行政方面。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “administrator”, pos: “n.”, chinese: “管理人員，行政人員”, sentences: [{en: “She works as a school administrator.”, ch: “她是學校的一名行政人員。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “amateur”, pos: “adj.”, chinese: “業餘愛好的，非職業的”, sentences: [{en: “He was an amateur singer until the age of 40 when he turned professional.”, ch: “40歲之前他一直是個業餘歌手，之後才轉為職業歌手。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “anonymous”, pos: “adj.”, chinese: “匿名的；不知姓名的；名字不公開的”, sentences: [{en: “The money was donated by an anonymous benefactor.”, ch: “這筆錢來自一位不願透露姓名的捐贈者。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “applicant”, pos: “n.”, chinese: “申請人”, sentences: [{en: “How many applicants did you have for the job?”, ch: “申請這份工作的有多少人？”}], voc: “voc.2”, unit: “unit1” },
-    { word: “application”, pos: “n.”, chinese: “申請，請求；應用軟體”, sentences: [{en: “I’ve sent off applications for four different jobs.”, ch: “我投寄申請四份不同工作的求職信。”}, {en: “By the time I saw the job advertised it was already too late to apply.”, ch: “我看到招聘廣告的時候，已經太晚了，錯過了應徵時機。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “apply”, pos: “v.”, chinese: “申請，請求”, sentences: [{en: “By the time I saw the job advertised it was already too late to apply.”, ch: “我看到招聘廣告的時候，已經太晚了，錯過了應徵時機。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “appoint”, pos: “v.”, chinese: “任命；委任”, sentences: [{en: “He’s just been appointed (as) director of the publishing division.”, ch: “他剛剛被任命為出版部主任。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “appointment”, pos: “n.”, chinese: “約會；預約；約定；[工作]任命，委派”, sentences: [{en: “We would like to announce the appointment of Julia Lewis as head of sales.”, ch: “我們很高興地宣佈朱麗亞・路易士被任命為銷售部主任。”}, {en: “I’d like to make an appointment with Doctor Evans, please.”, ch: “勞駕，我要預約埃文斯醫生的門診。”}, {en: “House for sale, two bedrooms. Viewing by appointment only.”, ch: “兩房公寓出售，看房請務必預約。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “apprentice”, pos: “n.”, chinese: “學徒；徒弟”, sentences: [{en: “Most of the work was done by apprentices.”, ch: “大部分工作是由學徒做的。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “assign”, pos: “v.”, chinese: “分派；分配；指派”, sentences: [{en: “Jack was assigned to the assembly shop of the factory.”, ch: “傑克被分配到廠裡的裝配間工作。”}, {en: “UN troops were assigned the task of rebuilding the hospital.”, ch: “重建這間醫院的任務被指派給了聯合國部隊。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “assistant”, pos: “n.”, chinese: “助手；幫手；助理”, sentences: [{en: “an administrative/office assistant”, ch: “行政／辦公室助理”}], voc: “voc.2”, unit: “unit1” },
-    { word: “candidate”, pos: “n.”, chinese: “申請人，候選人”, sentences: [{en: “There are three candidates standing in the election.”, ch: “有三位候選人參加競選。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “certificate”, pos: “n.”, chinese: “證書；證明”, sentences: [{en: “She has a Certificate in Drama Education.”, ch: “她有戲劇教育資格證書。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “certification”, pos: “n.”, chinese: “證明；檢定；保證”, sentences: [{en: “You are able to notify up to eight days’ illness by self-certification.”, ch: “請八天以下的病假，自己出示生病證明即可。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “certified”, pos: “adj.”, chinese: “有合格證書的；獲得資格的”, sentences: [{en: “a certified teacher/nurse”, ch: “有資格證書的教師／護士”}], voc: “voc.2”, unit: “unit1” },
-    { word: “certify”, pos: “v.”, chinese: “（通常以書面形式）證明，證實”, sentences: [{en: “I hereby certify (that) the above information is true and accurate.”, ch: “茲證明上述情況屬實準確無誤。”}, {en: “The meat has been certified (as) fit for human consumption.”, ch: “已證實該肉品適合人食用。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “chair / chairman”, pos: “n.”, chinese: “（會議或組織的）主席，委員長，主持人”, sentences: [{en: “The chair called the meeting to order.”, ch: “主席宣布會議開始。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “chief executive”, pos: “n.”, chinese: “（公司或機構的）總經理，總裁”, sentences: [{en: “She’s the chief executive of one of the country’s largest charities.”, ch: “她是該國最大的慈善組織之一的負責人。”}, {en: “Chief executive officer (CEO)”, ch: “執行長”}], voc: “voc.2”, unit: “unit1” },
-    { word: “colleague”, pos: “n.”, chinese: “同事；同僚”, sentences: [{en: “Marlin is getting along very well with his colleagues.”, ch: “馬林跟他的同事相處得很好。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “commentate”, pos: “v.”, chinese: “評論；解說；註釋”, sentences: [{en: “She commentates on the tennis each year at Wimbledon.”, ch: “她每年都為溫布頓網球錦標賽作評述。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “commentator”, pos: “n.”, chinese: “（廣播或電視的）解說員，評論員”, sentences: [{en: “a sports commentator”, ch: “體育節目”}, {en: “football commentator”, ch: “足球評述員”}, {en: “a news commentator”, ch: “新聞評論員”}], voc: “voc.2”, unit: “unit1” },
-    { word: “commitment”, pos: “n.”, chinese: “忠誠；投入；奉獻；承諾，保證，諾言”, sentences: [{en: “I’d like to thank the staff for having shown such commitment.”, ch: “我要對全體員工作出的巨大奉獻表示感謝。”}, {en: “Try the product out in the comfort of your own home with absolutely no commitment to buy!”, ch: “可在家隨意試用本產品且根本無須購買！”}], voc: “voc.2”, unit: “unit1” },
-    { word: “compliment”, pos: “n./v.”, chinese: “誇獎；讚美；讚揚；奉承（話）”, sentences: [{en: “I must compliment you on your handling of a very difficult situation.”, ch: “我必須表揚你對困難局面的處理。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “consult”, pos: “v.”, chinese: “諮詢”, sentences: [{en: “An increasing number of people are consulting their accountants about the tax laws.”, ch: “愈來愈多人跟他們的會計諮詢稅務法令相關問題。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “consultant”, pos: “n.”, chinese: “[公司]顧問”, sentences: [{en: “Financial consultants provide financial advice to corporations and money managers.”, ch: “金融顧問提供公司及資金管理人財政上的建議。”}, {en: “They’ve hired a computer consultant to assess how the company can upgrade its system.”, ch: “他們聘用電腦顧問來評估公司電腦系統的升級。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “counsel”, pos: “v./n.”, chinese: “建議”, sentences: [{en: “My job involves counseling unemployed people on/about how to find work.”, ch: “我的工作是向失業者提供就業諮詢。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “counselling”, pos: “n.”, chinese: “諮詢服務”, sentences: [{en: “a counselling service”, ch: “諮詢服務”}], voc: “voc.2”, unit: “unit1” },
-    { word: “counselor”, pos: “n.”, chinese: “顧問；諮詢師；輔導員”, sentences: [{en: “Career counselors work with people who are seeking career advice or going through a job transition.”, ch: “就業顧問協助需要諮詢或事業正在轉換的對象。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “courtesy”, pos: “n.”, chinese: “謙恭有禮的舉止，禮貌；禮節；客氣話”, sentences: [{en: “He could at least have had the courtesy to say sorry.”, ch: “他至少應該知道說句對不起。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “co-worker”, pos: “n.”, chinese: “同事，同僚”, sentences: [{en: “We’re entertaining some co-workers of Ben’s tonight.”, ch: “今晚我們要招待本的幾位同事。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “credential”, pos: “n.”, chinese: “資歷，資格；資格證書”, sentences: [{en: “All the candidates have excellent academic credentials.”, ch: “所有候選人都具有優秀的學歷證書。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “dedicate”, pos: “v.”, chinese: “奉獻，獻出（全部精力、時間等）”, sentences: [{en: “He has dedicated his life to scientific research.”, ch: “他把自己的一生都奉獻給科學研究工作。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “demand”, pos: “v./n.”, chinese: “堅決請求，強烈要求；強要；需求”, sentences: [{en: “The car workers’ union is demanding a 7% pay raise this year.”, ch: “汽車工會要求今年加薪7%。”}, {en: “There was little demand for tickets.”, ch: “很少有人來買票。”}, {en: “His new job makes a lot of demands on him (= he has to work very hard).”, ch: “新工作對他要求很高。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “designate”, pos: “v.”, chinese: “指定，選定；委派；指定，劃定（特徵、用途）”, sentences: [{en: “She has been designated to organize the meeting.”, ch: “她被派來組織這次會議。”}, {en: “They officially designated the area (as) unsuitable for human habitation.”, ch: “他們把這個地區正式劃定為不適合人類居住的區域。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “designation”, pos: “n.”, chinese: “指定地區；指定事物；正式職務；正式名稱”, sentences: [{en: “The area qualifies for designation as a site of special scientific interest.”, ch: “該地區作為具有特殊科學趣味的區域是名不虛傳。”}, {en: “What’s her official designation now that she’s been promoted?”, ch: “她晉升後的正式職務是甚麼？”}], voc: “voc.2”, unit: “unit1” },
-
-
+    
     // --- Unit 2 (51-101) ---
     { word: "coordinate", pos: "v.", chinese: "協調；使相配合；調節", exampleEn: "We need someone to coordinate the whole campaign.", exampleCh: "我們需要個人來協調整個活動。", voc: "voc.1", unit: "unit2" },
     { word: "coordination", pos: "n.", chinese: "協調；調節", exampleEn: "There's absolutely no coordination between the different groups.", exampleCh: "不同小組之間根本沒有協調可言。", voc: "voc.1", unit: "unit2" },
@@ -278,11 +225,7 @@ const rawDataList = [
     { word: "locate", pos: "v.", chinese: "位於／在附近／坐落在...", exampleEn: "Our office is located in the city centre.", exampleCh: "我們的辦事處位於市中心。", voc: "voc.1", unit: "unit2" },
     { word: "merge", pos: "v.", chinese: "(使) 合併；(使) 融合", exampleEn: "They decided to merge the two companies into one.", exampleCh: "他們決定將兩家公司合併起來。", voc: "voc.1", unit: "unit2" },
     { word: "merger", pos: "n.", chinese: "(公司、企業等) 合併", exampleEn: "She's an attorney who advises companies about mergers and takeovers.", exampleCh: "她是一位專門為公司合併與收購提供建議的律師。", voc: "voc.1", unit: "unit2" },
-    // 2-2
-    { word: “determination”, pos: “n.”, chinese: “決定，確定”, sentences: [{en: “The determination of policy is not your business - your job is to implement it.”, ch: “政策的決定與你無關——你的工作就是執行。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “determine”, pos: “v.”, chinese: “確定，決定；影響”, sentences: [{en: “They have determined where the new school will be built.”, ch: “他們已確定這所新的學校將建造在什麼地方。”}], voc: “voc.2”, unit: “unit1” },
-    { word: “diligent”, pos: “adj.”, chinese: “認真刻苦的，勤奮的，勤勞的”, sentences: [{en: “Leo is very diligent in/about his work.”, ch: “利奧工作非常勤奮。”}], voc: “voc.2”, unit: “unit1” },
-
+  
     // --- Unit 3 (102-150) 以多重例句格式儲存 ---
     { word: "minor", pos: "adj.", chinese: "較不重要的；次要的；輕微的", sentences: [{en: "It requires a few minor adjustments.", ch: "需要作幾處小的調整。"}], voc: "voc.1", unit: "unit3" },
     { word: "notice", pos: "n./v.", chinese: "公告，通知，貼示；注意；察覺 / 看到；注意到；感覺到；通知", sentences: [{en: "I noticed a crack in the ceiling.", ch: "我注意到天花板上有一道裂縫。"}, {en: "There was a large notice on the wall saying 'No Parking'.", ch: "牆上有一張很大的公告牌寫著「禁止停車」。"}], voc: "voc.1", unit: "unit3" },
