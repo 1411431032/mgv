@@ -3,57 +3,67 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>多益 700 分</title>
+<title>多益 700 分 - 複習精簡版</title>
 <style>
-:root { --primary: #2563eb; --star: #f1c40f; --bg: #f1f5f9; --text: #1e293b; }
+:root { 
+    --primary: #2563eb; 
+    --star: #f1c40f; 
+    --bg: #f1f5f9; 
+    --text: #1e293b; 
+    --mask-bg: #cbd5e1; 
+}
 body { font-family: 'Segoe UI', 'Microsoft JhengHei', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 20px; }
 .container { max-width: 1250px; margin: auto; background: white; padding: 25px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
 
 /* 頂部控制區 */
 .header { display: flex; flex-direction: column; align-items: center; margin-bottom: 25px; }
-.controls { display: flex; flex-wrap: wrap; gap: 10px; width: 100%; margin-top: 15px; }
+.controls { display: flex; flex-wrap: wrap; gap: 8px; width: 100%; margin-top: 15px; justify-content: center; }
 input#searchInput { flex-grow: 1; min-width: 200px; padding: 12px; border: 2px solid #e2e8f0; border-radius: 10px; outline: none; transition: 0.3s; }
 input#searchInput:focus { border-color: var(--primary); }
 
-select.filter-select { padding: 10px; border: 2px solid #e2e8f0; border-radius: 10px; outline: none; background: white; color: #475569; font-weight: bold; cursor: pointer; }
-select.filter-select:focus { border-color: var(--primary); }
+.filter-select { padding: 10px; border: 2px solid #e2e8f0; border-radius: 10px; outline: none; background: white; color: #475569; font-weight: bold; cursor: pointer; }
 
-.btn { padding: 10px 18px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; transition: 0.2s; display: flex; align-items: center; gap: 5px; }
+.btn { padding: 10px 15px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; transition: 0.2s; display: flex; align-items: center; gap: 5px; font-size: 0.9rem; }
 .btn-filter { background-color: white; border: 2px solid #e2e8f0; color: #64748b; }
 .btn-filter.active { background-color: var(--star); color: #856404; border-color: #f1c40f; }
-.btn-add { background-color: #10b981; color: white; }
-.btn-reset { background-color: #fee2e2; color: #ef4444; font-size: 12px; }
+
+/* 遮蔽控制按鈕樣式 */
+.btn-mask-ctrl { background-color: #6366f1; color: white; }
+.btn-mask-ctrl.active { background-color: #4338ca; box-shadow: inset 0 2px 4px rgba(0,0,0,0.2); }
 
 /* 表格樣式 */
-table { width: 100%; border-collapse: collapse; }
+table { width: 100%; border-collapse: collapse; margin-top: 10px; }
 th { background-color: #f8fafc; padding: 15px; text-align: left; border-bottom: 2px solid #e2e8f0; color: #64748b; }
 td { padding: 15px; border-bottom: 1px solid #f1f5f9; vertical-align: middle; }
 tr:hover { background-color: #fdfdfd; }
 
 /* 單字與收藏 */
 .word-box { display: flex; align-items: center; gap: 10px; }
-.star-icon { cursor: pointer; font-size: 1.4rem; color: #cbd5e1; transition: 0.2s; user-select: none; position: relative; z-index: 2; }
+.star-icon { cursor: pointer; font-size: 1.4rem; color: #cbd5e1; transition: 0.2s; user-select: none; }
 .star-icon.active { color: var(--star); }
-.word-text { font-weight: 800; color: var(--primary); font-size: 1.2rem; }
+.word-text { font-weight: 800; color: var(--primary); font-size: 1.2rem; cursor: pointer; }
 
-/* 中文資訊樣式 */
+/* 遮蔽效果 */
 .mask-text {
     position: relative;
     display: inline-block;
     cursor: pointer;
-    background-color: #cbd5e1; 
+    background-color: var(--mask-bg); 
     color: transparent; 
     border-radius: 6px;
-    padding: 2px 12px;
-    min-width: 60px;
+    padding: 2px 8px;
+    min-width: 40px;
     transition: all 0.2s ease;
     user-select: none;
 }
 .mask-text.show {
     background-color: transparent;
-    color: var(--text);
+    color: inherit;
     user-select: auto;
 }
+
+/* 針對單字的特殊遮蔽顏色 */
+.mask-word { background-color: #94a3b8; }
 
 .pos-tag { padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; color: white; background: #94a3b8; font-weight: bold; margin-right: 4px; display: inline-block;}
 .pos-n { background: #f59e0b; }
@@ -61,62 +71,65 @@ tr:hover { background-color: #fdfdfd; }
 .pos-adj { background: #10b981; }
 .pos-adv { background: #8b5cf6; }
 
-.audio-btn { background: #f1f5f9; border: none; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; color: var(--primary); flex-shrink: 0; position: relative; z-index: 2; }
+.audio-btn { background: #f1f5f9; border: none; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; color: var(--primary); transition: 0.2s; }
 .audio-btn:hover { background: var(--primary); color: white; }
 
-/* 多句例句排版 */
-.sentence-block { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px dashed #e2e8f0; }
+/* 例句排版 */
+.sentence-block { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px dashed #e2e8f0; }
 .sentence-block:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
-.example-en { font-style: italic; color: #475569; margin-bottom: 4px; display: block; font-weight: 500; }
-.example-ch { font-size: 0.9rem; display: inline-block; min-height: 1.2em; }
+.example-en { font-style: italic; color: #475569; margin-bottom: 4px; display: block; font-weight: 500; cursor: pointer; }
+.example-ch { font-size: 0.9rem; }
 
 @media (max-width: 900px) {
     th:nth-child(2), th:nth-child(3) { display: none; }
-    td { display: block; border: none; }
-    tr { display: block; border-bottom: 4px solid #f1f5f9; padding: 10px 0; }
+    td { display: block; border: none; padding: 10px; }
+    tr { display: block; border-bottom: 4px solid #f1f5f9; }
 }
 </style>
 </head>
 <body>
 
 <div class="container">
-<div class="header">
-<h1>🚀 多益 700 分</h1>
-<div class="controls">
-<input type="text" id="searchInput" placeholder="搜尋單字、中文..." onkeyup="render()">
+    <div class="header">
+        <h1>🚀 多益 700 分</h1>
+        <div class="controls">
+            <input type="text" id="searchInput" placeholder="搜尋單字、中文..." onkeyup="render()">
+            
+            <select id="vocFilter" class="filter-select" onchange="render()">
+                <option value="all">所有分類 (Voc)</option>
+                <option value="voc.1">Voc. 1</option>
+                <option value="voc.2">Voc. 2</option>
+            </select>
 
-<select id="vocFilter" class="filter-select" onchange="render()">
-    <option value="all">所有分類 (Voc)</option>
-    <option value="voc.1">Voc. 1</option>
-    <option value="voc.2">Voc. 2</option>
-    
-</select>
+            <select id="unitFilter" class="filter-select" onchange="render()">
+                <option value="all">所有單元 (Unit)</option>
+                <option value="unit1">Unit 1</option>
+                <option value="unit2">Unit 2</option>
+                <option value="unit3">Unit 3</option>
+            </select>
 
-<select id="unitFilter" class="filter-select" onchange="render()">
-    <option value="all">所有單元 (Unit)</option>
-    <option value="unit1">Unit 1</option>
-    <option value="unit2">Unit 2</option>
-    <option value="unit3">Unit 3</option>
-</select>
+            <button id="filterBtn" class="btn btn-filter" onclick="toggleFilter()">⭐ 只看收藏</button>
+        </div>
 
-<button id="filterBtn" class="btn btn-filter" onclick="toggleFilter()">⭐ 只看收藏</button>
-<button class="btn btn-add" onclick="manualAdd()">＋ 新增</button>
-<button class="btn btn-reset" onclick="resetData()">還原預設</button>
-</div>
-</div>
+        <div class="controls">
+            <button id="btnMaskWord" class="btn btn-mask-ctrl" onclick="toggleMaskType('mask-word', this)">👁️ 隱藏單字</button>
+            <button id="btnMaskDef" class="btn btn-mask-ctrl" onclick="toggleMaskType('mask-def', this)">📖 隱藏定義</button>
+            <button id="btnMaskSent" class="btn btn-mask-ctrl" onclick="toggleMaskType('mask-sent', this)">📝 隱藏例句</button>
+            <button class="btn" style="background:#475569; color:white;" onclick="maskAll(false)">🔓 全部解除</button>
+        </div>
+    </div>
 
-<table>
-<thead>
-<tr>
-<th width="20%">單字</th>
-<th width="10%">詞性</th>
-<th width="20%">中文定義</th>
-<th width="45%">例句</th>
-<th width="5%"></th>
-</tr>
-</thead>
-<tbody id="vocabBody"></tbody>
-</table>
+    <table>
+        <thead>
+            <tr>
+                <th width="20%">單字</th>
+                <th width="10%">詞性</th>
+                <th width="20%">中文定義</th>
+                <th width="45%">例句</th>
+            </tr>
+        </thead>
+        <tbody id="vocabBody"></tbody>
+    </table>
 </div>
 
 <script>
@@ -173,8 +186,7 @@ const rawDataList = [
     { word: "contributor", pos: "n.", chinese: "捐獻者；貢獻者", exampleEn: "Older people are contributors to the economy.", exampleCh: "老人是經濟的重要貢獻者。", voc: "voc.1", unit: "unit1" },
     { word: "cooperate", pos: "v.", chinese: "合作；配合", exampleEn: "The two companies cooperated in joint ventures.", exampleCh: "兩家公司在合資企業中合作。", voc: "voc.1", unit: "unit1" },
     { word: "cooperation", pos: "n.", chinese: "合作；協助", exampleEn: "The company produces computers in cooperation with others.", exampleCh: "該公司與其他公司合作生產電腦。", voc: "voc.1", unit: "unit1" },
-    
-    // Voc 2, Unit 1 - Personnel Management (No. 1–53)
+        // Voc 2, Unit 1 - Personnel Management (No. 1–53)
 { word: "a bachelor's degree", pos: "n.", chinese: "學士學位", sentences: [{en: "This job requires at least a bachelor's degree in business.", ch: "這份工作要求至少有商學學士學位。"}], voc: "voc.2", unit: "unit1" },
 { word: "a degree", pos: "n.", chinese: "部分地；在某種程度上", sentences: [{en: "She's got a bachelor's/master's degree in history from Yale.", ch: "她獲得了耶魯大學歷史學專業的學士／碩士學位。"}], voc: "voc.2", unit: "unit1" },
 { word: "a doctoral degree / a PhD degree", pos: "n.", chinese: "博士學位", sentences: [{en: "She has a doctorate in physics from Norwich.", ch: "她獲得了諾里奇大學的物理學博士學位。"}], voc: "voc.2", unit: "unit1" },
@@ -225,7 +237,6 @@ const rawDataList = [
 { word: "demand", pos: "v./n.", chinese: "堅決請求，強烈要求；強要；需求", sentences: [{en: "The car workers' union is demanding a 7% pay raise this year.", ch: "汽車工會要求今年加薪7%。"}, {en: "There was little demand for tickets.", ch: "很少有人來買票。"}, {en: "His new job makes a lot of demands on him (= he has to work very hard).", ch: "新工作對他要求很高。"}], voc: "voc.2", unit: "unit1" },
 { word: "designate", pos: "v.", chinese: "指定，選定；委派；指定，劃定（特徵、用途）", sentences: [{en: "She has been designated to organize the meeting.", ch: "她被派來組織這次會議。"}, {en: "They officially designated the area (as) unsuitable for human habitation.", ch: "他們把這個地區正式劃定為不適合人類居住的區域。"}], voc: "voc.2", unit: "unit1" },
 { word: "designation", pos: "n.", chinese: "指定地區；指定事物；正式職務；正式名稱", sentences: [{en: "The area qualifies for designation as a site of special scientific interest.", ch: "該地區作為具有特殊科學趣味的區域是名不虛傳。"}, {en: "What's her official designation now that she's been promoted?", ch: "她晉升後的正式職務是甚麼？"}], voc: "voc.2", unit: "unit1" },
-
     // --- Unit 2 (51-101) ---
     { word: "coordinate", pos: "v.", chinese: "協調；使相配合；調節", exampleEn: "We need someone to coordinate the whole campaign.", exampleCh: "我們需要個人來協調整個活動。", voc: "voc.1", unit: "unit2" },
     { word: "coordination", pos: "n.", chinese: "協調；調節", exampleEn: "There's absolutely no coordination between the different groups.", exampleCh: "不同小組之間根本沒有協調可言。", voc: "voc.1", unit: "unit2" },
@@ -279,11 +290,55 @@ const rawDataList = [
     { word: "merge", pos: "v.", chinese: "(使) 合併；(使) 融合", exampleEn: "They decided to merge the two companies into one.", exampleCh: "他們決定將兩家公司合併起來。", voc: "voc.1", unit: "unit2" },
     { word: "merger", pos: "n.", chinese: "(公司、企業等) 合併", exampleEn: "She's an attorney who advises companies about mergers and takeovers.", exampleCh: "她是一位專門為公司合併與收購提供建議的律師。", voc: "voc.1", unit: "unit2" },
     //2-2
-    { word: "determination", pos: "n.", chinese: "決定，確定", sentences: [{en: "The determination of policy is not your business - your job is to implement it.", ch: "政策的決定與你無關——你的工作就是執行。"}], voc: "voc.2", unit: "unit2" },
-    { word: "determine", pos: "v.", chinese: "確定，決定；影響", sentences: [{en: "They have determined where the new school will be built.", ch: "他們已確定這所新的學校將建造在什麼地方。"}], voc: "voc.2", unit: "unit2" },
-    { word: "diligent", pos: "adj.", chinese: "認真刻苦的，勤奮的，勤勞的", sentences: [{en: "Leo is very diligent in/about his work.", ch: "利奧工作非常勤奮。"}], voc: "voc.2", unit: "unit2" },
-
-    
+{ word: "determination", pos: "n.", chinese: "決定，確定", sentences: [{en: "The determination of policy is not your business - your job is to implement it.", ch: "政策的決定與你無關——你的工作就是執行。"}], voc: "voc.2", unit: "unit2" },
+{ word: "determine", pos: "v.", chinese: "確定，決定；影響", sentences: [{en: "They have determined where the new school will be built.", ch: "他們已確定這所新的學校將建造在什麼地方。"}], voc: "voc.2", unit: "unit2" },
+{ word: "diligent", pos: "adj.", chinese: "認真刻苦的，勤奮的，勤勞的", sentences: [{en: "Leo is very diligent in/about his work.", ch: "利奧工作非常勤奮。"}], voc: "voc.2", unit: "unit2" },
+{ word: "director", pos: "n.", chinese: "經理，管理者，主任，董事", sentences: [{en: "the board of directors", ch: "董事會"}, {en: "Every decision has to be passed by the board (of directors).", ch: "每項決定都必須由董事會通過。"}, {en: "He'll be the acting director until they can appoint a permanent one.", ch: "在他們任命正式董事之前，他將代理這個職位元。"}], voc: "voc.2", unit: "unit2" },
+{ word: "dismiss", pos: "v.", chinese: "對…不予理會，摒棄，（從頭腦中）去除", sentences: [{en: "He has been dismissed from his job for incompetence.", ch: "他因無法勝任工作而被解職。"}, {en: "Let's not just dismiss the idea before we've even thought about it.", ch: "我們還是別不假思索就把這種想法排除在外。"}], voc: "voc.2", unit: "unit2" },
+{ word: "educator", pos: "n.", chinese: "教師；教育工作者", sentences: [{en: "That educator published many articles in these magazines.", ch: "那位教育工作者在這些雜誌上發表了許多文章。"}], voc: "voc.2", unit: "unit2" },
+{ word: "elect", pos: "v.", chinese: "選舉，推選；選擇做…", sentences: [{en: "We elected him as our representative.", ch: "我們選他當代表。"}], voc: "voc.2", unit: "unit2" },
+{ word: "election", pos: "n.", chinese: "選舉；當選；選舉", sentences: [{en: "Her election to the board of directors caused great surprise.", ch: "她被選進董事會，令人大為吃驚。"}], voc: "voc.2", unit: "unit2" },
+{ word: "employ", pos: "v.", chinese: "僱用", sentences: [{en: "How many people does your company employ?", ch: "你們公司僱有多少員工？"}], voc: "voc.2", unit: "unit2" },
+{ word: "employee", pos: "n.", chinese: "受僱者，僱員，員工", sentences: [{en: "She's a former council employee/employee of the council.", ch: "她以前是為該委員會工作的僱員。"}], voc: "voc.2", unit: "unit2" },
+{ word: "employer", pos: "n.", chinese: "雇主", sentences: [{en: "We need a reference from your former employer.", ch: "我們需要你前任僱主的推薦信。"}], voc: "voc.2", unit: "unit2" },
+{ word: "employment", pos: "n.", chinese: "受僱；就業；有工作，在職", sentences: [{en: "How long have you been looking for employment?", ch: "你找工作已經找了多久時間了？"}, {en: "Are you in employment at the moment?", ch: "你現在有工作嗎？"}], voc: "voc.2", unit: "unit2" },
+{ word: "engage", pos: "v.", chinese: "僱用；聘用；參加；參與 / 僱用；聘用；吸引；佔用（時間，精力等）；使從事，使忙於", sentences: [{en: "The two governments have agreed to engage in a comprehensive dialogue to resolve the problem.", ch: "兩國政府已經同意開展全面對話以解決該問題。"}, {en: "I have engaged a secretary to deal with all my paperwork.", ch: "我僱用了一名秘書來處理我全部的文書工作。"}, {en: "If a book doesn't engage my interest in the first few pages, I don't usually carry on reading it.", ch: "如果一本書的前幾頁不能引起我的興趣，通常我就不再往下讀了。"}, {en: "He was busily engaged in painting the furniture.", ch: "他忙於油漆傢俱。"}], voc: "voc.2", unit: "unit2" },
+{ word: "engagement", pos: "n.", chinese: "約定；約會；預約；僱用；僱用期；保證；需償付的款項", sentences: [{en: "I'm afraid I have a previous/prior engagement (= another arrangement already made).", ch: "對不起，我已經有約了。"}, {en: "He has only enough money to meet his engagements.", ch: "他的錢剛夠付約定的款項。"}, {en: "The singer signed a contract for a two-week engagement.", ch: "那位歌手簽了為期兩週的演出合同。"}], voc: "voc.2", unit: "unit2" },
+{ word: "enroll", pos: "v.", chinese: "（使）加入；註冊；招（生）；吸收", sentences: [{en: "I enrolled for/in the modern art course.", ch: "我註冊修讀現代藝術課程。"}, {en: "The secretary enrolled our names.", ch: "秘書登記了我們的名字。"}, {en: "They enrolled us as members of the club.", ch: "他們將我們吸收為該俱樂部會員。"}], voc: "voc.2", unit: "unit2" },
+{ word: "enrollment", pos: "n.", chinese: "登記；入會；入伍；登記人數", sentences: [{en: "The school has an enrollment of 800 students.", ch: "該學校有八百名學生註冊。"}], voc: "voc.2", unit: "unit2" },
+{ word: "executive", pos: "n.", chinese: "行政主管，經理", sentences: [{en: "She is now a senior executive, having worked her way up through the company.", ch: "她現在是高級行政主管，這是她在公司中一步一腳印爬上來的。"}], voc: "voc.2", unit: "unit2" },
+{ word: "facilitate", pos: "v.", chinese: "促進；促使", sentences: [{en: "The current structure does not facilitate efficient work flow.", ch: "當前的體系不利於實施高效的工作流程。"}, {en: "Mr. Bloom and Mr. Gordon will work together to facilitate the timely launch of the new product line into the market.", ch: "布魯先生與高登先生會合力推動新產品線的及時上市。"}], voc: "voc.2", unit: "unit2" },
+{ word: "faculty", pos: "n.", chinese: "【主美】（大學或院，系的）全體教職員；能力；技能", sentences: [{en: "She has recently joined the faculty of Yale University.", ch: "她最近當了耶魯大學的教授。"}, {en: "He has a great faculty for mathematics.", ch: "他具有很強的學數學的才能。"}], voc: "voc.2", unit: "unit2" },
+{ word: "fit", pos: "v.", chinese: "合適，合身；可容納；適合；勝任；符合", sentences: [{en: "I don't think another desk will fit into this classroom.", ch: "我認為這間教室一張書桌也擱不下了。"}, {en: "My car's too big to fit in this space.", ch: "我的車太大了，這個地方停不下。"}, {en: "That jacket fits you perfectly.", ch: "那件外套你穿著很合身。"}, {en: "With her qualifications, she should fit the job perfectly.", ch: "以她的資歷，應該完全能勝任這份工作。"}, {en: "I'm sure we'll have something to fit your requirements, Madam.", ch: "我肯定我們會有合您意的東西，夫人。"}], voc: "voc.2", unit: "unit2" },
+{ word: "fluent", pos: "adj.", chinese: "流利的", sentences: [{en: "She's fluent in French", ch: "她的法語很流利。"}], voc: "voc.2", unit: "unit2" },
+{ word: "graduate", pos: "v./n.", chinese: "取得學士學位；大學畢業 / 大學畢業生；學士學位獲得者", sentences: [{en: "Chris is a physics graduate.", ch: "克裡斯是物理專業的畢業生。"}, {en: "Lorna graduated from the University of London.", ch: "洛娜畢業於倫敦大學。"}], voc: "voc.2", unit: "unit2" },
+{ word: "graduation", pos: "n.", chinese: "畢業；獲得畢業文憑", sentences: [{en: "a graduation ceremony", ch: "畢業典禮。"}, {en: "He hopes to get a good job after graduation.", ch: "他希望畢業後能得到份好工作。"}], voc: "voc.2", unit: "unit2" },
+{ word: "hire", pos: "v.", chinese: "僱，僱用", sentences: [{en: "I was hired by the first company I applied to.", ch: "我應徵的第一家公司僱用了我。"}], voc: "voc.2", unit: "unit2" },
+{ word: "inspect", pos: "v.", chinese: "檢查；審查；視察", sentences: [{en: "Health Department officials came to inspect the factory.", ch: "衛生部的官員來視察這個工廠。"}, {en: "After the crash both drivers got out and inspected their cars for damage.", ch: "撞車後，兩輛車的司機都下來檢查各自的車有無損壞。"}], voc: "voc.2", unit: "unit2" },
+{ word: "inspector", pos: "n.", chinese: "檢查員；視察員", sentences: [{en: "a school inspector/an inspector of schools", ch: "督學"}, {en: "a tax inspector", ch: "稅務稽查員"}], voc: "voc.2", unit: "unit2" },
+{ word: "instruct", pos: "v.", chinese: "教，講授；指示，命令，吩咐", sentences: [{en: "He works in a sports centre instructing people in the use of the gym equipment.", ch: "他在體育中心工作，教人們如何使用健身器材。"}], voc: "voc.2", unit: "unit2" },
+{ word: "instructor", pos: "n.", chinese: "教練；指導者；【美】大學講師", sentences: [{en: "Aerobics instructor", ch: "有氧健身操教練"}], voc: "voc.2", unit: "unit2" },
+{ word: "integral", pos: "adj.", chinese: "構成整體所必需的；整體的", sentences: [{en: "He's an integral part of the team and we can't do without him.", ch: "他是球隊不可或缺的一員，沒有他我們可不行。"}], voc: "voc.2", unit: "unit2" },
+{ word: "intern", pos: "n.", chinese: "實習人員，實習生", sentences: [{en: "She worked in the White House as an intern.", ch: "她在白宮做實習生。"}], voc: "voc.2", unit: "unit2" },
+{ word: "internship", pos: "n.", chinese: "實習期", sentences: [{en: "Jane has a summer internship at a local TV station.", ch: "暑期時，簡在當地一家電視台實習。"}], voc: "voc.2", unit: "unit2" },
+{ word: "interview", pos: "n.", chinese: "面試；面談", sentences: [{en: "In a television interview last night she denied she had any intention of resigning.", ch: "在昨晚的電視採訪中，她否認有辭職的打算。"}], voc: "voc.2", unit: "unit2" },
+{ word: "lecture", pos: "n./v.", chinese: "演講", sentences: [{en: "We went to a lecture on Italian art.", ch: "我們去參加了一個關於義大利藝術的講座。"}, {en: "Who's giving the lecture this afternoon?", ch: "今天下午的講座由誰來講？"}, {en: "For ten years she lectured in law.", ch: "她教了十年的法律課。"}], voc: "voc.2", unit: "unit2" },
+{ word: "lecturer", pos: "n.", chinese: "（學院或大學的）講師，教師；講演者", sentences: [{en: "The lecturer was a middle-aged man.", ch: "講演者是個中年男人。"}, {en: "His brother-in-law is a lecturer of history.", ch: "他的姊夫是大學歷史講師。"}], voc: "voc.2", unit: "unit2" },
+{ word: "letters of recommendation", pos: "n.", chinese: "推薦信", sentences: [{en: "Will you write a recommendation for me?", ch: "你替我寫封推薦信好嗎？"}], voc: "voc.2", unit: "unit2" },
+{ word: "manage", pos: "v.", chinese: "管理，掌管；經營（尤指企業）", sentences: [{en: "Has she had any experience of managing large projects?", ch: "她有負責大型專案計劃的經驗嗎？"}], voc: "voc.2", unit: "unit2" },
+{ word: "management", pos: "n.", chinese: "管理層，資方；管理；經營", sentences: [{en: "Management has/have offered staff a 3% pay increase.", ch: "資方提出為職工加薪3%。"}, {en: "The company has suffered from several years of bad management.", ch: "公司數年來一直經營不善。"}], voc: "voc.2", unit: "unit2" },
+{ word: "managerial", pos: "adj.", chinese: "經理的；管理的；經營上的", sentences: [{en: "managerial responsibilities/decisions/skills", ch: "管理責任／決策／技巧"}], voc: "voc.2", unit: "unit2" },
+{ word: "member", pos: "n.", chinese: "成員；會員", sentences: [{en: "Car parking facilities are for members only.", ch: "停車設施僅供會員使用。"}, {en: "a new club member", ch: "俱樂部新會員"}], voc: "voc.2", unit: "unit2" },
+{ word: "merit", pos: "n.", chinese: "優點；價值；功績", sentences: [{en: "The committee say they will consider/judge each applicant on his or her own merits.", ch: "委員會表示他們會根據每位申請者自身的條件斟酌考慮／作出判斷。"}], voc: "voc.2", unit: "unit2" },
+{ word: "minimum", pos: "adj.", chinese: "最小值；最少量；最低限度", sentences: [{en: "minimum requirement", ch: "最低的要求"}, {en: "Wage increases are being kept to a minimum because of the recession.", ch: "由於經濟衰退，工資增長的幅度被保持在最低水準。"}], voc: "voc.2", unit: "unit2" },
+{ word: "nominate", pos: "v.", chinese: "提名，推薦", sentences: [{en: "He's been nominated by the Green Party as their candidate in the next election.", ch: "他被綠黨提名為下屆選舉的候選人。"}], voc: "voc.2", unit: "unit2" },
+{ word: "nomination", pos: "n.", chinese: "提名，推薦", sentences: [{en: "There have been two nominations for the new job.", ch: "這項新工作有兩位提名人選。"}], voc: "voc.2", unit: "unit2" },
+{ word: "novice", pos: "n.", chinese: "新手，初學者", sentences: [{en: "I've never driven a car before - I'm a complete novice.", ch: "我以前從未開過車——完全是個新手。"}], voc: "voc.2", unit: "unit2" },
+{ word: "occupation", pos: "n.", chinese: "職業；工作", sentences: [{en: "He is a bus driver by occupation.", ch: "他的職業是公車司機。"}], voc: "voc.2", unit: "unit2" },
+{ word: "opportunity", pos: "n.", chinese: "機遇；時機；機會；可能性", sentences: [{en: "Everyone will have an opportunity to comment.", ch: "每個人都有機會發表意見。"}], voc: "voc.2", unit: "unit2" },
+{ word: "orientation", pos: "n.", chinese: "取向；目標；定向；（對新工作、新活動的）培訓或準備", sentences: [{en: "the company's new eco-friendly orientation.", ch: "公司保護生態環境的新定位。"}, {en: "The department has arranged an orientation session.", ch: "系裡安排了一次迎新活動。"}], voc: "voc.2", unit: "unit2" },
+{ word: "oversee", pos: "v.", chinese: "監督；監察；監管", sentences: [{en: "As marketing manager, her job is to oversee all the company's advertising.", ch: "作為行銷經理，她的工作是負責公司所有的廣告業務。"}, {en: "He will now oversee global manufacturing and productivity.", ch: "他現在將監督全球製造業和生產力。"}, {en: "You must employ someone to oversee the project.", ch: "你得雇個人監督這一工程。"}], voc: "voc.2", unit: "unit2" },
+{ word: "payroll", pos: "n.", chinese: "（公司員工的）在職人員工資表，工資名單；（公司的）工資發放總額", sentences: [{en: "McDermot Software is growing fast, adding another 100 employees to its payroll over the last year.", ch: "麥狄蒙軟體公司發展迅速，在職員工在去年內又增加了100人。"}, {en: "a payroll tax", ch: "薪水稅，工資稅"}, {en: "With debts of $4 million and a monthly payroll of $1.2 million, the venture is clearly heading for trouble.", ch: "該企業欠債400萬美元，每月又須支付120萬美元工資，無疑它將陷入困境。"}], voc: "voc.2", unit: "unit2" },
     // --- Unit 3 (102-150) 以多重例句格式儲存 ---
     { word: "minor", pos: "adj.", chinese: "較不重要的；次要的；輕微的", sentences: [{en: "It requires a few minor adjustments.", ch: "需要作幾處小的調整。"}], voc: "voc.1", unit: "unit3" },
     { word: "notice", pos: "n./v.", chinese: "公告，通知，貼示；注意；察覺 / 看到；注意到；感覺到；通知", sentences: [{en: "I noticed a crack in the ceiling.", ch: "我注意到天花板上有一道裂縫。"}, {en: "There was a large notice on the wall saying 'No Parking'.", ch: "牆上有一張很大的公告牌寫著「禁止停車」。"}], voc: "voc.1", unit: "unit3" },
@@ -333,27 +388,124 @@ const rawDataList = [
     { word: "template", pos: "n.", chinese: "樣板，範本", sentences: [{en: "We used the structure of his report as the template for ours.", ch: "我們把他的報告結構當作我們的範本。"}], voc: "voc.1", unit: "unit3" },
     { word: "temporary", pos: "adj./n.", chinese: "短暫的；暫時的，臨時的 / 臨時工，臨時雇員", sentences: [{en: "Ellen has got a temporary job.", ch: "艾倫找到一份臨時工作。"}, {en: "She works in the office as a temporary.", ch: "她在辦公室做臨時雇員。"}], voc: "voc.1", unit: "unit3" },
     { word: "tentative", pos: "adj.", chinese: "試驗(性)的，試探(性)的，暫時的", sentences: [{en: "I have made tentative plans to take a trip to Seattle in July.", ch: "我暫定七月去西雅圖旅行。"}], voc: "voc.1", unit: "unit3" },
-    { word: "translate", pos: "v.", chinese: "譯，翻譯；轉化(尤指將計劃變為現實)", sentences: [{en: "She works for the EU, translating from English into French.", ch: "她在歐盟工作，擔任英譯法翻譯。"}], voc: "voc.1", unit: "unit3" }
+    { word: "translate", pos: "v.", chinese: "譯，翻譯；轉化(尤指將計劃變為現實)", sentences: [{en: "She works for the EU, translating from English into French.", ch: "她在歐盟工作，擔任英譯法翻譯。"}], voc: "voc.1", unit: "unit3" },
+    //voc2nuit3
+    { word: "personnel", pos: "n.", chinese: "全體人員，員工", sentences: [{en: "For more information about the job, please contact the personnel manager.", ch: "如欲瞭解這份工作的詳情，請聯絡人事部經理。"}, {en: "The new director is likely to make major changes in personnel.", ch: "新主管可能會在人事上做出大變動。"}], voc: "voc.2", unit: "unit3" },
+    { word: "position", pos: "n.", chinese: "工作；職務；地位；位置", sentences: [{en: "She applied for a position in the firm that I work for.", ch: "她向我工作的公司應徵了一個職位。"}], voc: "voc.2", unit: "unit3" },
+    { word: "president", pos: "n.", chinese: "總裁，董事長；總統", sentences: [{en: "She's a friend of the president of the bank.", ch: "她是銀行總裁的朋友。"}], voc: "voc.2", unit: "unit3" },
+
 ];
 
-// 將舊版格式標準化 (把單一句子轉換為陣列格式以統一排版)
-const normalizedData = rawDataList.map(item => {
-    if (!item.sentences) {
-        return {
-            ...item,
-            sentences: [{ en: item.exampleEn, ch: item.exampleCh }],
-            favorite: false
-        };
-    }
-    return { ...item, favorite: false };
-});
+const normalizedData = rawDataList.map(item => ({
+    ...item,
+    favorite: false,
+    sentences: item.sentences || [{ en: item.exampleEn, ch: item.exampleCh }]
+}));
 
-// 使用 localStorage 管理資料 (更新版本號為 v8 確保載入新格式)
-let vocabs = JSON.parse(localStorage.getItem('myVocabDB_v8')) || normalizedData;
+let vocabs = JSON.parse(localStorage.getItem('myVocabDB_v9')) || normalizedData;
 let onlyShowFavorites = false;
+let maskStates = { 'mask-word': false, 'mask-def': false, 'mask-sent': false };
+
+// 語音引擎優化
+let synth = window.speechSynthesis;
+let preferredVoice = null;
+
+// 取得高品質語音包
+function loadVoices() {
+    let voices = synth.getVoices();
+    // 優先順序：Edge/Google 的 Neural 語音 > 一般 Google 語音 > 英文預設語音
+    preferredVoice = voices.find(v => v.name.includes("Microsoft Online") && v.lang.startsWith("en")) ||
+                     voices.find(v => v.name.includes("Google") && v.lang.startsWith("en")) ||
+                     voices.find(v => v.lang.startsWith("en"));
+}
+
+// 監聽語音包載入（部分瀏覽器非同步載入）
+if (speechSynthesis.onvoiceschanged !== undefined) {
+    speechSynthesis.onvoiceschanged = loadVoices;
+}
+loadVoices();
+
+function speak(text, rate = 0.9) {
+    synth.cancel(); // 先停止之前的發音
+    const msg = new SpeechSynthesisUtterance(text);
+    
+    if (preferredVoice) {
+        msg.voice = preferredVoice;
+    }
+    
+    msg.lang = 'en-US';
+    msg.rate = rate; // 稍微放慢一點更像自然說話
+    msg.pitch = 1.0;
+    msg.volume = 1.0;
+    
+    synth.speak(msg);
+}
 
 function save() {
-    localStorage.setItem('myVocabDB_v8', JSON.stringify(vocabs));
+    localStorage.setItem('myVocabDB_v9', JSON.stringify(vocabs));
+    render();
+}
+
+function render() {
+    const query = document.getElementById('searchInput').value.toLowerCase();
+    const selVoc = document.getElementById('vocFilter').value;
+    const selUnit = document.getElementById('unitFilter').value;
+    const body = document.getElementById('vocabBody');
+
+    const filtered = vocabs.filter((v) => {
+        const matchesSearch = v.word.toLowerCase().includes(query) || v.chinese.includes(query);
+        const matchesFav = onlyShowFavorites ? v.favorite : true;
+        const matchesVoc = (selVoc === 'all') ? true : (v.voc === selVoc);
+        const matchesUnit = (selUnit === 'all') ? true : (v.unit === selUnit);
+        return matchesSearch && matchesFav && matchesVoc && matchesUnit;
+    });
+
+    body.innerHTML = filtered.map((item) => {
+        const realIndex = vocabs.findIndex(v => v.word === item.word);
+        
+        const posTags = item.pos.split('/').map(p => {
+            const cleanPos = p.replace('.', '').trim();
+            return `<span class="pos-tag pos-${cleanPos}">${p}</span>`;
+        }).join('');
+
+        const sentencesHtml = item.sentences.map((sent) => `
+            <div class="sentence-block">
+                <button class="audio-btn" style="width:26px; height:26px; font-size:0.7rem;" onclick="speak('${sent.en.replace(/'/g, "\\'")}', 0.85)">🔊</button>
+                <div>
+                    <span class="example-en" onclick="speak('${sent.en.replace(/'/g, "\\'")}', 0.85)">${sent.en}</span>
+                    <span class="example-ch mask-text mask-sent ${maskStates['mask-sent'] ? '' : 'show'}" onclick="this.classList.toggle('show')">${sent.ch}</span>
+                </div>
+            </div>
+        `).join('');
+
+        return `
+        <tr>
+            <td>
+                <div class="word-box">
+                    <span class="star-icon ${item.favorite ? 'active' : ''}" onclick="toggleStar(event, ${realIndex})">★</span>
+                    <button class="audio-btn" onclick="speak('${item.word.replace(/'/g, "\\'")}', 0.8)">🔊</button>
+                    <span class="word-text mask-text mask-word ${maskStates['mask-word'] ? '' : 'show'}" onclick="this.classList.toggle('show')">${item.word}</span>
+                </div>
+            </td>
+            <td>${posTags}</td>
+            <td>
+                <span class="mask-text mask-def ${maskStates['mask-def'] ? '' : 'show'}" onclick="this.classList.toggle('show')">${item.chinese}</span>
+            </td>
+            <td>${sentencesHtml}</td>
+        </tr>
+        `;
+    }).join('');
+}
+
+function toggleMaskType(type, btn) {
+    maskStates[type] = !maskStates[type];
+    btn.classList.toggle('active', maskStates[type]);
+    render();
+}
+
+function maskAll(shouldMask) {
+    maskStates = { 'mask-word': shouldMask, 'mask-def': shouldMask, 'mask-sent': shouldMask };
+    document.querySelectorAll('.btn-mask-ctrl').forEach(b => b.classList.toggle('active', shouldMask));
     render();
 }
 
@@ -367,127 +519,10 @@ function toggleFilter() {
     onlyShowFavorites = !onlyShowFavorites;
     const btn = document.getElementById('filterBtn');
     btn.classList.toggle('active', onlyShowFavorites);
-    btn.innerHTML = onlyShowFavorites ? "★ 收藏模式" : "⭐ 只看收藏";
     render();
-}
-
-// 修改遮罩切換，支援多重例句
-function toggleMaskRow(defId, baseExId, sentenceCount) {
-    const defEl = document.getElementById(defId);
-    if (!defEl) return;
-    const isShowing = defEl.classList.contains('show');
-    
-    if (isShowing) {
-        defEl.classList.remove('show');
-        for (let i = 0; i < sentenceCount; i++) {
-            const exEl = document.getElementById(`${baseExId}-${i}`);
-            if (exEl) exEl.classList.remove('show');
-        }
-    } else {
-        defEl.classList.add('show');
-        for (let i = 0; i < sentenceCount; i++) {
-            const exEl = document.getElementById(`${baseExId}-${i}`);
-            if (exEl) exEl.classList.add('show');
-        }
-    }
-}
-
-function render() {
-    const query = document.getElementById('searchInput').value.toLowerCase();
-    const selVoc = document.getElementById('vocFilter').value;
-    const selUnit = document.getElementById('unitFilter').value;
-    const body = document.getElementById('vocabBody');
-
-    const filtered = vocabs.filter((v) => {
-        const matchesSearch = v.word.toLowerCase().includes(query) || (v.chinese && v.chinese.includes(query));
-        const matchesFav = onlyShowFavorites ? v.favorite : true;
-        const matchesVoc = (selVoc === 'all') ? true : (v.voc === selVoc);
-        const matchesUnit = (selUnit === 'all') ? true : (v.unit === selUnit);
-        return matchesSearch && matchesFav && matchesVoc && matchesUnit;
-    });
-
-    body.innerHTML = filtered.map((item) => {
-        const realIndex = vocabs.findIndex(v => v.word === item.word);
-        const defId = `def-${realIndex}`;
-        const exId = `ex-${realIndex}`;
-        const sentenceCount = item.sentences.length;
-
-        // 生成多詞性標籤
-        const posTags = item.pos.split('/').map(p => {
-            const cleanPos = p.replace('.', '').trim();
-            return `<span class="pos-tag pos-${cleanPos}">${p}</span>`;
-        }).join('');
-
-        // 生成多個例句的 HTML
-        const sentencesHtml = item.sentences.map((sent, sIdx) => `
-            <div class="sentence-block" onclick="event.stopPropagation(); toggleMaskRow('${defId}', '${exId}', ${sentenceCount})">
-                <button class="audio-btn" style="width:26px; height:26px; font-size:0.7rem;" onclick="event.stopPropagation(); speak('${sent.en.replace(/'/g, "\\'")}', 0.9)">🔊</button>
-                <div>
-                    <span class="example-en">${sent.en}</span>
-                    <span id="${exId}-${sIdx}" class="example-ch mask-text">${sent.ch}</span>
-                </div>
-            </div>
-        `).join('');
-
-        return `
-        <tr>
-            <td onclick="toggleMaskRow('${defId}', '${exId}', ${sentenceCount})" style="cursor:pointer;">
-                <div class="word-box">
-                    <span class="star-icon ${item.favorite ? 'active' : ''}" onclick="toggleStar(event, ${realIndex})">★</span>
-                    <button class="audio-btn" onclick="event.stopPropagation(); speak('${item.word.replace(/'/g, "\\'")}', 0.8)">🔊</button>
-                    <span class="word-text">${item.word}</span>
-                </div>
-            </td>
-            <td>${posTags}</td>
-            <td onclick="toggleMaskRow('${defId}', '${exId}', ${sentenceCount})" style="cursor:pointer;">
-                <span id="${defId}" class="mask-text">${item.chinese}</span>
-            </td>
-            <td style="cursor:pointer;">
-                ${sentencesHtml}
-            </td>
-            <td><button style="border:none; background:none; cursor:pointer; opacity:0.1;" onclick="deleteWord(${realIndex})">🗑️</button></td>
-        </tr>
-        `;
-    }).join('');
-}
-
-function speak(text, rate) {
-    window.speechSynthesis.cancel();
-    const msg = new SpeechSynthesisUtterance(text);
-    msg.lang = 'en-US';
-    msg.rate = rate;
-    window.speechSynthesis.speak(msg);
-}
-
-function manualAdd() {
-    const word = prompt("單字:"); if (!word) return;
-    const pos = prompt("詞性 (例如 n./v./adj.):", "n.");
-    const chinese = prompt("中文:");
-    const exampleEn = prompt("英文例句:");
-    const exampleCh = prompt("中文翻譯:");
-    const voc = document.getElementById('vocFilter').value === 'all' ? "voc.1" : document.getElementById('vocFilter').value;
-    const unit = document.getElementById('unitFilter').value === 'all' ? "unit3" : document.getElementById('unitFilter').value;
-    
-    vocabs.unshift({ 
-        word, pos, chinese, voc, unit, favorite: false,
-        sentences: [{en: exampleEn, ch: exampleCh}]
-    });
-    save();
-}
-
-function deleteWord(index) {
-    if(confirm("確定要刪除嗎？")) { vocabs.splice(index, 1); save(); }
-}
-
-function resetData() {
-    if(confirm("還原為初始單字列表？（這會清除你自己新增的單字）")) { 
-        vocabs = [...normalizedData]; 
-        save(); 
-    }
 }
 
 render();
 </script>
-
 </body>
 </html>
